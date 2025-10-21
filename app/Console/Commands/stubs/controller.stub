@@ -41,7 +41,7 @@ class {{controllerName}} extends Controller
      */
     public function getCreate()
     {
-        return $this->views($this->module().'.form');
+        return $this->views($this->module('form'));
     }
 
     /**
@@ -70,7 +70,7 @@ class {{controllerName}} extends Controller
     {
         $model = $this->model->findOrFail($code);
 
-        return $this->views($this->module().'.form', $this->share([
+        return $this->views($this->module(true).'.form', $this->share([
             'model' => $model,
         ]));
     }
@@ -97,7 +97,7 @@ class {{controllerName}} extends Controller
     public function postBulkDelete(Request $request)
     {
         $ids = explode(',', $request->ids);
-        $this->model::whereIn('id', $ids)->delete();
+        $this->model::whereIn($this->model->field_key(), $ids)->delete();
 
         return redirect()->route($this->module('getData'))->with('success', 'deleted successfully');
     }

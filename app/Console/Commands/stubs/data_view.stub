@@ -9,7 +9,7 @@
                     </div>
                     <div class="row">
                         <x-select name="perpage" :options="['10' => '10', '20' => '20', '50' => '50', '100' => '100']" :value="request('perpage', 10)" col="2" id="perpage-select"/>
-                        <x-select name="filter" :options="{{filterOptions}}" :value="request('filter', 'All Filter')" col="4"/>
+                        <x-select name="filter" :options="{{filterOptions}}" :value="request('filter')" col="4"/>
                         <x-input name="search" type="text" placeholder="Enter search term" :value="request('search')" col="6"/>
                     </div>
                     <div class="form-actions">
@@ -35,7 +35,7 @@
                                 </tr>
                                 @forelse($data as $list)
                                     <tr>
-                                        <td class="checkbox-column"><input type="checkbox" class="row-checkbox" value="{{ $list->id }}" /></td>
+                                        <td class="checkbox-column"><input type="checkbox" class="row-checkbox" value="{{ $list->field_key }}" /></td>
                                         <td data-label="Actions">
                                             <x-action-table :model="$list" />
                                         </td>

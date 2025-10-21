@@ -20,6 +20,7 @@ class {{modelName}} extends Model
     protected $table = '{{table}}';
     protected $primaryKey = '{{primaryKey}}';
     public $incrementing = {{incrementing}};
+    public $timestamps = false;
     protected $keyType = '{{keyType}}';
 
     protected $fillable = {{fillable}};

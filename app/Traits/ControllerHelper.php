@@ -27,6 +27,33 @@ trait ControllerHelper
      *
      * @return string
      */
+    public function form($function = null)
+    {
+        // Get the class name (e.g., UserController)
+        $className = class_basename(get_class($this));
+
+        // Remove 'Controller' suffix and convert to lowercase
+        $module = strtolower(str_replace('Controller', '', $className));
+
+        // Get the method name (e.g., getCreate)
+        $method = debug_backtrace()[1]['function'];
+
+        // Remove 'get' or 'post' prefix and convert to lowercase
+        $action = strtolower(preg_replace('/^(get|post)/', '', $method));
+
+        if ($function)
+        {
+            $action = $function;
+        }
+
+        return $module.'.'.$action;
+    }
+
+    /**
+     * Get automatic view module from controller class and method names
+     *
+     * @return string
+     */
     public function module($function = null)
     {
         // Get the class name (e.g., UserController)

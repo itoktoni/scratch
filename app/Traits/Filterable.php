@@ -27,9 +27,16 @@ trait Filterable
         }
 
         // Filter by search term based on filter field
-        if ($request->filled('search') && $request->filled('filter') && $request->filter !== 'All Filter') {
+        if ($request->filled('search')) {
             $field = $this->mapFilterField($request->filter);
-            $query->where($field, 'like', '%'.$request->search.'%');
+            if(!empty($field))
+            {
+                $query->where($field, 'like', '%'.$request->search.'%');
+            }
+            else
+            {
+                $query->where($this->field_name(), 'like', '%'.$request->search.'%');
+            }
         }
 
         // Apply sorting

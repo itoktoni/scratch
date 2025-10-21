@@ -213,7 +213,7 @@ class MakeCrud extends Command
         $tableHeaders = [];
         $tableData = [];
         $filterFields = [];
-        $filterOptions = ["'All Filter'"];
+        $filterOptions = ["'' => 'All Filter'"];
 
         foreach ($columns as $column => $details) {
             if (!in_array($column, ['id', 'created_at', 'updated_at'])) {
@@ -224,7 +224,7 @@ class MakeCrud extends Command
                 // Add filter fields for first two columns or common searchable fields
                 if (count($filterFields) < 2 && !str_contains($details['type'], 'text')) {
                     $filterFields[] = "<x-input name=\"{$column}\" type=\"text\" placeholder=\"Search by {$label}\" :value=\"request('{$column}')\" col=\"6\"/>";
-                    $filterOptions[] = "'{$column}'";
+                    $filterOptions[] = "'{$column}' => '{$label}'";
                 }
             }
         }
@@ -269,20 +269,20 @@ class MakeCrud extends Command
                     if (isset($matches[1])) {
                         $options = explode(',', str_replace("'", '', $matches[1]));
                         $optionsStr = "['" . implode("', '", $options) . "']";
-                        $formFields[] = "<x-select name=\"{$column}\" :options=\"{$optionsStr}\" {$required} />";
+                        $formFields[] = "<x-select :model=\"\$model\" name=\"{$column}\" :options=\"{$optionsStr}\" {$required} />";
                     }
                 } elseif (str_contains($details['type'], 'text')) {
-                    $formFields[] = "<x-textarea name=\"{$column}\" rows=\"4\" {$required} />";
+                    $formFields[] = "<x-textarea :model=\"\$model\" name=\"{$column}\" rows=\"4\" {$required} />";
                 } elseif (str_contains($details['type'], 'int') || str_contains($details['type'], 'decimal') || str_contains($details['type'], 'double')) {
-                    $formFields[] = "<x-input type=\"number\" name=\"{$column}\" {$required} />";
+                    $formFields[] = "<x-input :model=\"\$model\" type=\"number\" name=\"{$column}\" {$required} />";
                 } elseif (str_contains($details['type'], 'date')) {
-                    $formFields[] = "<x-input type=\"date\" name=\"{$column}\" {$required} />";
+                    $formFields[] = "<x-input :model=\"\$model\" type=\"date\" name=\"{$column}\" {$required} />";
                 } elseif (str_contains($details['type'], 'datetime')) {
-                    $formFields[] = "<x-input type=\"datetime-local\" name=\"{$column}\" {$required} />";
+                    $formFields[] = "<x-input :model=\"\$model\" type=\"datetime-local\" name=\"{$column}\" {$required} />";
                 } elseif ($details['key'] === 'PRI' && !$details['nullable']) {
-                    $formFields[] = "<x-input name=\"{$column}\" :attributes=\"isset(\$model) ? ['readonly' => true] : []\" hint=\"{$label} cannot be changed\" {$required} />";
+                    $formFields[] = "<x-input :model=\"\$model\" name=\"{$column}\" :attributes=\"isset(\$model) ? ['readonly' => true] : []\" hint=\"{$label} cannot be changed\" {$required} />";
                 } else {
-                    $formFields[] = "<x-input name=\"{$column}\" {$required} />";
+                    $formFields[] = "<x-input :model=\"\$model\" name=\"{$column}\" {$required} />";
                 }
             }
         }
