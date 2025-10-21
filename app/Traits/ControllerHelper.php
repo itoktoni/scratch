@@ -46,6 +46,11 @@ trait ControllerHelper
             $action = $function;
         }
 
+        if($function === true)
+        {
+            return $module;
+        }
+
         return $module.'.'.$action;
     }
 

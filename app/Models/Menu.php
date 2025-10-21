@@ -11,6 +11,8 @@ class Menu extends Model
 {
     use Filterable, DefaultEntity, OptionModel;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -43,6 +45,11 @@ class Menu extends Model
         'menu_name',
         'menu_controller',
     ];
+
+    public static function field_name()
+    {
+        return 'menu_name';
+    }
 
     public function rules($id = null)
     {

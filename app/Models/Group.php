@@ -11,6 +11,8 @@ class Group extends Model
 {
     use Filterable, DefaultEntity, OptionModel;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,6 +43,11 @@ class Group extends Model
         'group_icon',
         'group_link',
     ];
+
+    public static function field_name()
+    {
+        return 'group_name';
+    }
 
     public function rules($id = null)
     {

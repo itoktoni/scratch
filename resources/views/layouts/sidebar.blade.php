@@ -47,7 +47,7 @@
                 <div class="sub-menu-list">
                     @foreach ($context['menu']->where('menu_group', $group->field_key) as $menu)
                         <a href="{{ route($menu->field_key . '.index') }}"
-                            class="{{ $menu->field_key === $seg2 ? 'active' : '' }}">
+                            class="{{ $group->field_key === $seg1 && $menu->field_key === $seg2 ? 'active' : '' }}">
                             <span>{{ $menu->field_name }}</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>

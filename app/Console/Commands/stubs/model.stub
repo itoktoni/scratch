@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\DefaultEntity;
+use App\Traits\Filterable;
+use App\Traits\OptionModel;
+use Illuminate\Database\Eloquent\Model;
+
+class {{modelName}} extends Model
+{
+    use Filterable, DefaultEntity, OptionModel;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+
+    protected $table = '{{table}}';
+    protected $primaryKey = '{{primaryKey}}';
+    public $incrementing = {{incrementing}};
+    protected $keyType = '{{keyType}}';
+
+    protected $fillable = {{fillable}};
+
+    protected $filterable = {{filterable}};
+
+    protected $sortable = {{sortable}};
+
+    public function rules($id = null)
+    {
+        $rules = {{rules}};
+
+        return $rules;
+    }
+}

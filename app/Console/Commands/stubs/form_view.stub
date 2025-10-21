@@ -1,0 +1,10 @@
+<x-layout>
+    <x-card :model="$model">
+        <x-form :model="$model">
+            {{formFields}}
+
+            <x-footer :model="$model" />
+
+        </x-form>
+    </x-card>
+</x-layout>

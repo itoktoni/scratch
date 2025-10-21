@@ -1,0 +1,7 @@
+<x-layout>
+    <x-card :model="$model">
+        {{showFields}}
+
+        <x-footer type="show" :model="$model" />
+    </x-card>
+</x-layout>
