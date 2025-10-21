@@ -28,6 +28,11 @@ class {{modelName}} extends Model
 
     protected $sortable = {{sortable}};
 
+    public static function field_name()
+    {
+        return '{{table}}_name';
+    }
+
     public function rules($id = null)
     {
         $rules = {{rules}};
