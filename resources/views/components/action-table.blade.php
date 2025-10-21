@@ -5,7 +5,7 @@
         <i class="bi bi-pencil-square"></i>
     </a>
 
-    <button type="button" class="button danger" onclick="confirmDelete('{{ route(module('getDelete'), $model) }}', '{{ $model->name }}')">
+    <button type="button" class="button danger" onclick="confirmDelete('{{ route(module('getDelete'), $model) }}', '{{ $model->field_key }}')">
         <i class="bi bi-trash"></i>
     </button>
 

@@ -88,7 +88,7 @@ class {{controllerName}} extends Controller
      */
     public function getDelete($code)
     {
-        $this->model = $this->getModel($code);
+        $this->model = $this->model->findOrFail($code);
         $this->model->delete();
 
         return redirect()->route($this->module('getData'))->with('success', 'deleted successfully');
